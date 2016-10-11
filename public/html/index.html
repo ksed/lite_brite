@@ -9,13 +9,13 @@
   <body>
     <div class="row">
       <h1>Lite Brite Settings:</h1>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4 col-xs-4">
         <div class="form-group">
           <label for="umber-of-rows">Please enter the number of rows:</label>
           <input type="text" id="number-of-rows" class="form-control" placeholder="default: 15">
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4 col-xs-4">
         <div class="form-group">
           <label for="number-of-cols">Please enter the number of columns:</label>
           <input type="text" id="number-of-cols" class="form-control" placeholder="default: 15">
@@ -23,8 +23,21 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-sm-4 col-xs-4">
         <button type="button" id="update-grid-button" class="btn btn-success">Update/Clear Grid</button>
+      </div>
+      <div class="col-md-4">
+        <span>Select a paint color:
+          <select id="paint-color">
+            <option value="red">red</option>
+            <option value="black">black</option>
+            <option value="blue">blue</option>
+            <option value="cyan">cyan</option>
+            <option value="green">green</option>
+            <option value="magenta">magenta</option>
+            <option value="yellow">yellow</option>
+          </select>
+        </span>
       </div>
     </div>
     <hr>

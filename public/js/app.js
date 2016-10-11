@@ -3,12 +3,13 @@
   var updateGridButton = $('#update-grid-button');
   var numberOfRowsInput = $('#number-of-rows');
   var numberOfColsInput = $('#number-of-cols');
+  var paintColor = $('select');
   var nrows, ncols;
 
   makeGrid(15, 15);
   // clearGrid();
   // makeGrid(30, 30);
-  var cells = $('.cell').on('click', changeColor);
+  var cells = $('.cell').on('click', toggleColor);
 
   updateGridButton.on('click', updateGridSize);
 
@@ -25,16 +26,16 @@
     }
   }
 
-  function changeColor(event) {
+  function toggleColor(event) {
     // just 'this' cell's background-color
-    $(this).toggleClass('red');
+    $(this).toggleClass( paintColor.val() );
   }
 
   function updateGridSize() {
     if (isGridInputOK()) {
       canvas.empty();
       makeGrid(nrows, ncols);
-      cells = $('.cell').on('click', changeColor);
+      cells = $('.cell').on('click', toggleColor);
     }
   }
 
