@@ -7,6 +7,23 @@
   <link rel="stylesheet" href="/css/main.css">
 </head>
   <body>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="umber-of-rows">Please enter the number of rows:</label>
+          <input type="text" id="number-of-rows" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="number-of-cols">Please enter the number of columns:</label>
+          <input type="text" id="number-of-cols" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <button type="button" id="update-grid-button" class="btn btn-success">Update Grid Size</button>
+      </div>
+    </div>
     <div class="container">
       <table id="canvas"></table>
     </div>

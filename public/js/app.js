@@ -1,10 +1,15 @@
 (function() {
   var canvas = $('#canvas'); // my placement area - think of paper in drawing
+  var updateGridButton = $('#update-grid-button');
+  var numberOfRowsInput = $('#number-of-rows');
+  var numberOfColsInput = $('#number-of-cols');
 
   makeGrid(15, 15);
-  clearGrid();
-  makeGrid(30, 30);
+  // clearGrid();
+  // makeGrid(30, 30);
   var cells = $('.cell').on('click', changeColor);
+
+  updateGridButton.on('click', updateGridSize);
 
   function makeGrid(numberOfRows, numberOfCols) {
     // make rows and put them in the body
@@ -24,7 +29,12 @@
     $(this).toggleClass('red');
   }
 
-  function clearGrid() {
+  function updateGridSize() {
     canvas.empty();
+    var numberRowsNumber = parseInt( numberOfRowsInput.val() );
+    var numberColsNumber = parseInt( numberOfColsInput.val() );
+    makeGrid(numberRowsNumber, numberColsNumber);
+    cells = $('.cell').on('click', changeColor);
   }
+
 }());
