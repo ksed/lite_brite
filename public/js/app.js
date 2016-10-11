@@ -3,6 +3,7 @@
   var updateGridButton = $('#update-grid-button');
   var numberOfRowsInput = $('#number-of-rows');
   var numberOfColsInput = $('#number-of-cols');
+  var nrows, ncols;
 
   makeGrid(15, 15);
   // clearGrid();
@@ -30,24 +31,26 @@
   }
 
   function updateGridSize() {
-    if (checkInput()) {
+    if (isGridInputOK()) {
       canvas.empty();
-      var numberRowsNumber = parseInt( numberOfRowsInput.val() );
-      var numberColsNumber = parseInt( numberOfColsInput.val() );
-      makeGrid(numberRowsNumber, numberColsNumber);
+      makeGrid(nrows, ncols);
       cells = $('.cell').on('click', changeColor);
     }
   }
 
-  function checkInput() {
+  function isGridInputOK() {
     var nr = parseInt( numberOfRowsInput.val() );
     var nc = parseInt( numberOfColsInput.val() );
     if (!nr || !nc) {
-      return false;
+      nrows = 15;
+      ncols = 15;
+      return true;
     } else if (nr*nc >= 10000) {
       alert("Your grid is deemed too dense to display. Adjust your numbers to try again.");
       return false;
     } else {
+      nrows = nr;
+      ncols = nc;
       return true;
     }
   }
