@@ -30,11 +30,26 @@
   }
 
   function updateGridSize() {
-    canvas.empty();
-    var numberRowsNumber = parseInt( numberOfRowsInput.val() );
-    var numberColsNumber = parseInt( numberOfColsInput.val() );
-    makeGrid(numberRowsNumber, numberColsNumber);
-    cells = $('.cell').on('click', changeColor);
+    if (checkInput()) {
+      canvas.empty();
+      var numberRowsNumber = parseInt( numberOfRowsInput.val() );
+      var numberColsNumber = parseInt( numberOfColsInput.val() );
+      makeGrid(numberRowsNumber, numberColsNumber);
+      cells = $('.cell').on('click', changeColor);
+    }
+  }
+
+  function checkInput() {
+    var nr = parseInt( numberOfRowsInput.val() );
+    var nc = parseInt( numberOfColsInput.val() );
+    if (!nr || !nc) {
+      return false;
+    } else if (nr*nc >= 10000) {
+      alert("Your grid is deemed too dense to display. Adjust your numbers to try again.");
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }());
