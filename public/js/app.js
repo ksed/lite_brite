@@ -21,18 +21,18 @@
     $('#paint-color option').removeAttr("selected");
     switch (e.keyCode) {
         case 38:
-          if (selected_element.prev().val()) {
+          //if (selected_element.prev().val()) {
             //selected_element.removeAttr('selected');
-            selected_element.prev().attr('selected', 'selected');
+            selected_element.prev().prop('selected', true);
             $('#paint-color').val(selected_element.prev().val());
-          }
+          //}
           break;
         case 40:
-          if (selected_element.next().val()) {
+          //if (selected_element.next().val()) {
             //selected_element.removeAttr('selected');
-            selected_element.next().attr('selected', 'selected');
+            selected_element.next().prop('selected', true);
             $('#paint-color').val(selected_element.next().val());
-          }
+          //}
           break;
     }
   };

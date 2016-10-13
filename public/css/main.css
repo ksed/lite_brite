@@ -1,11 +1,22 @@
 body {
   background-color: whitesmoke;
-  margin-left: 20px;
-  margin-top: 20px;
 }
 
-#update-grid-button {
-  margin: auto;
+.main-app {
+  margin-left: 2%;
+}
+
+#title {
+  background-color: purple;
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-bottom: 3px;
+}
+
+#instructions {
+  font-family: cursive;
+  margin-bottom: 3px;
 }
 
 .cell {
