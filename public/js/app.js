@@ -4,7 +4,6 @@
   var addColorButton = $('#add-color-button');
   var numberOfRowsInput = $('#number-of-rows');
   var numberOfColsInput = $('#number-of-cols');
-  var paintColor = $('select');
   var newColor = $('#new-color');
   var selected_element = $('#paint-color option:selected');
   var nrows, ncols;
@@ -16,19 +15,21 @@
 
   updateGridButton.on('click', updateGridSize);
   addColorButton.on('click', addNewColor);
+  $('#paint-color option').on('click', selectColor);
   document.onkeydown = function(e) {
     selected_element = $('#paint-color option:selected');
+    $('#paint-color option').removeAttr("selected");
     switch (e.keyCode) {
         case 38:
-          if (selected_element.previous().val()) {
-            selected_element.removeAttr('selected');
-            selected_element.previous().attr('selected', 'selected');
-            $('#paint-color').val(selected_element.previous().val());
+          if (selected_element.prev().val()) {
+            //selected_element.removeAttr('selected');
+            selected_element.prev().attr('selected', 'selected');
+            $('#paint-color').val(selected_element.prev().val());
           }
           break;
         case 40:
           if (selected_element.next().val()) {
-            selected_element.removeAttr('selected');
+            //selected_element.removeAttr('selected');
             selected_element.next().attr('selected', 'selected');
             $('#paint-color').val(selected_element.next().val());
           }
@@ -51,7 +52,14 @@
 
   function toggleColor(event) {
     // just 'this' cell's background-color
-    $(this).toggleClass( paintColor.val() );
+    selected_option = $('#paint-color option:selected');
+    selected_cell = $(this);
+    if (selected_cell.attr('class') !== 'cell') {
+      if (selected_cell.attr('class') !== 'cell '+selected_option.val()) {
+        selected_cell.attr('class', 'cell');
+      }
+    }
+    selected_cell.toggleClass( selected_option.val() );
   }
 
   function updateGridSize() {
@@ -79,13 +87,20 @@
     }
   }
 
+  function selectColor(event) {
+    selected_element = $(this);
+    $('#paint-color option').removeAttr("selected");
+    selected_element.attr('selected', 'selected');
+  }
+
   function addNewColor() {
     // http://stackoverflow.com/questions/1212500/create-a-css-rule-class-with-jquery-at-runtime
     var newColorValue = newColor.val();
-    var colorName = "pound-"+newColorValue.slice(1);
+    var colorName = "hex-"+newColorValue.slice(1);
     if (newColorValue) {
       $("<style>").prop("type", "text/css").html("."+colorName+" {background-color: "+newColorValue+";}").appendTo("head");
-      $('#paint-color').append($('<option>', { value: colorName, text: colorName }));
+      $('#paint-color').append($('<option>', { value: colorName, text: newColorValue }));
+      $('#paint-color option').on('click', selectColor);
     }
   }
 }());
