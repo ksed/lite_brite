@@ -1,41 +1,23 @@
 (function() {
   var canvas = $('#canvas'); // my placement area - think of paper in drawing
-  var updateGridButton = $('#update-grid-button');
-  var addColorButton = $('#add-color-button');
+  var canvasSizeButton = $('#canvas-size');
+  var clearCanvasButton = $('#clear-canvas');
+  var addColorButton = $('#add-color');
   var numberOfRowsInput = $('#number-of-rows');
   var numberOfColsInput = $('#number-of-cols');
   var newColor = $('#new-color');
-  var selected_element = $('#paint-color option:selected');
-  var nrows, ncols;
+  var currentColor = $('#color-button').attr('class');
+  var newGridSize = {nr: 15, nc: 15};
 
   makeGrid(15, 15);
   // clearGrid();
   // makeGrid(30, 30);
-  var cells = $('.cell').on('click', toggleColor);
+  $('.cell').on('click', toggleCellColor);
+  var colorClicked = $('.li-color').on('click', selectColorPatch);
 
-  updateGridButton.on('click', updateGridSize);
+  canvasSizeButton.on('click', updateGridSize);
+  clearCanvasButton.on('click', clearCanvas);
   addColorButton.on('click', addNewColor);
-  $('#paint-color option').on('click', selectColor);
-  document.onkeydown = function(e) {
-    selected_element = $('#paint-color option:selected');
-    $('#paint-color option').removeAttr("selected");
-    switch (e.keyCode) {
-        case 38:
-          //if (selected_element.prev().val()) {
-            //selected_element.removeAttr('selected');
-            selected_element.prev().prop('selected', true);
-            $('#paint-color').val(selected_element.prev().val());
-          //}
-          break;
-        case 40:
-          //if (selected_element.next().val()) {
-            //selected_element.removeAttr('selected');
-            selected_element.next().prop('selected', true);
-            $('#paint-color').val(selected_element.next().val());
-          //}
-          break;
-    }
-  };
 
   function makeGrid(numberOfRows, numberOfCols) {
     // make rows and put them in the body
@@ -50,57 +32,60 @@
     }
   }
 
-  function toggleColor(event) {
-    // just 'this' cell's background-color
-    selected_option = $('#paint-color option:selected');
+  function toggleCellColor(event) {
     selected_cell = $(this);
     if (selected_cell.attr('class') !== 'cell') {
-      if (selected_cell.attr('class') !== 'cell '+selected_option.val()) {
+      if (selected_cell.attr('class') !== 'cell '+currentColor) {
         selected_cell.attr('class', 'cell');
       }
     }
-    selected_cell.toggleClass( selected_option.val() );
+    selected_cell.toggleClass( currentColor );
   }
 
   function updateGridSize() {
-    if (isGridInputOK()) {
+    var newRows = prompt('Enter number of rows:', '15');
+    var newCols = prompt('Enter number of columns:', '15');
+    if ( isGridInputOK(parseInt( newRows ), parseInt( newCols)) ) {
       canvas.empty();
-      makeGrid(nrows, ncols);
-      cells = $('.cell').on('click', toggleColor);
+      makeGrid(newGridSize.nr, newGridSize.nc);
+      $('.cell').on('click', toggleCellColor);
     }
   }
 
-  function isGridInputOK() {
-    var nr = parseInt( numberOfRowsInput.val() );
-    var nc = parseInt( numberOfColsInput.val() );
+  function isGridInputOK(nr, nc) {
     if (!nr || !nc) {
-      nrows = 15;
-      ncols = 15;
+      newGridSize.nr = 15;
+      newGridSize.nc = 15;
       return true;
     } else if (nr*nc >= 10000) {
       alert("Your grid is deemed too dense to display. Adjust your numbers to try again.");
       return false;
     } else {
-      nrows = nr;
-      ncols = nc;
+      newGridSize.nr = nr;
+      newGridSize.nc = nc;
       return true;
     }
   }
 
-  function selectColor(event) {
-    selected_element = $(this);
-    $('#paint-color option').removeAttr("selected");
-    selected_element.attr('selected', 'selected');
+  function clearCanvas() {
+    $('.cell').attr('class','cell');
+  }
+
+  function selectColorPatch(event) {
+    selectedPatch = $(this).text();
+    currentColor = selectedPatch;
+    $('#color-button').attr('class', selectedPatch);
   }
 
   function addNewColor() {
     // http://stackoverflow.com/questions/1212500/create-a-css-rule-class-with-jquery-at-runtime
-    var newColorValue = newColor.val();
-    var colorName = "hex-"+newColorValue.slice(1);
+    var newColorValue = prompt("Please enter a new hex color to paint with:"); // newColor.val();
+    currentColor = "hex-"+newColorValue.slice(1);
     if (newColorValue) {
-      $("<style>").prop("type", "text/css").html("."+colorName+" {background-color: "+newColorValue+";}").appendTo("head");
-      $('#paint-color').append($('<option>', { value: colorName, text: newColorValue }));
-      $('#paint-color option').on('click', selectColor);
+      $("style").append("."+currentColor+" {background-color: "+newColorValue+"; border: 1px solid "+newColorValue+"; text-shadow: 2px 2px black;}")
+      $('#color-list').append('<li class="li-color"><div class="'+currentColor+' color-patch" title="'+currentColor+'"></div>'+currentColor+'</li>');
+      $('#color-button').attr('class', currentColor);
+      colorClicked = $('.li-color').on('click', selectColorPatch);
     }
   }
 }());
