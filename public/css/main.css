@@ -9,22 +9,23 @@ body {
   border-bottom: 1px solid black;
   position: fixed;
   width: 100%;
-  z-index: 2;
-}
-
-#main-app {
-  padding-left: 2%;
-  padding-top: 8%;
   z-index: 1;
 }
 
+#main-app {
+  padding-left: 20px;
+  padding-top: 150px;
+  z-index: 1;
+  width: 450%
+}
+
 #instructions-menu {
-  padding: 23px 0px;
+  padding: 3px 0px 10px 0px;
   position: relative;
 }
 
 #color-menu {
-  padding: 23px 0px;
+  padding: 3px 0px 10px 0px;
   position: relative;
 }
 
@@ -44,7 +45,7 @@ body {
 
 #instructions-list li {
   padding-left: 3px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 #color-list li {
@@ -56,6 +57,7 @@ body {
 .color-patch {
   width: 12px;
   height: 12px;
+  padding: 6px 6px;
   display: inline-block;
   margin-right: 5px;
 }
@@ -98,6 +100,12 @@ body {
 .magenta {
   background-color: magenta;
   border: 1px solid magenta;
+  text-shadow: 2px 2px black;
+}
+
+.white {
+  background-color: white;
+  border: 1px solid white;
   text-shadow: 2px 2px black;
 }
 
