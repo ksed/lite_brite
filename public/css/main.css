@@ -8,30 +8,27 @@ body {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   position: fixed;
-  width: 720px;
   z-index: 1;
 }
 
 #main-app {
   padding-left: 10px;
-  padding-top: 150px;
+  padding-top: 145px;
   z-index: 1;
-  width: 450%
 }
 
 #instructions-menu {
   padding: 3px 0px 10px 0px;
-  position: relative;
 }
 
 #color-menu {
-  padding: 3px 0px 10px 0px;
-  position: relative;
+  margin: 3px 0px 10px 0px;
 }
 
 #instructions-label {
   background-color: whitesmoke;
   color: black;
+  margin-left: 5px;
 }
 
 .dropdown-menu {
@@ -57,7 +54,6 @@ body {
 .color-patch {
   width: 12px;
   height: 12px;
-  padding: 6px 6px;
   display: inline-block;
   margin-right: 5px;
 }
@@ -65,6 +61,7 @@ body {
 .cell {
   width: 16px;
   height: 16px;
+  padding: 8px 8px;
   background-color: black;
   border: 1px solid gray;
 }

@@ -10,17 +10,23 @@
 </head>
   <body>
     <header id="title">
-      <div class="container-fluid">
+      <div class="container">
         <div class="row">
           <div id="app-title" class="col-md-12 col-sm-12 col-xs-12">
-            <h2>Lite Brite Simulator</h2>
+            <h2>Lite-Brite Simulator</h2>
           </div>
         </div>
         <div class="row">
-          <div id="color-menu" class="col-md-2 col-sm-2 col-xs-2">
+          <div class="canvas col-md-1 col-sm-1 col-xs-2 col-md-offset-0 col-sm-offset-0 col-xs-offset-0">
+            <button id="canvas-size" type="button" class="btn btn-primary btn-sm">Canvas Size</button>
+          </div>
+          <div class="canvas col-md-2 col-sm-2 col-xs-3 col-md-offset-1 col-sm-offset-0 col-xs-offset-1">
+            <button id="clear-canvas" type="button" class="btn btn-success btn-sm">Clear Canvas</button>
+          </div>
+          <div id="color-menu" class="col-md-1 col-sm-3 col-xs-3 col-md-offset-1 col-sm-offset-1 col-xs-offset-2">
             <div class="dropdown">
               <button id="color-button" class="red" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Color-Selector
+                Paint
                 <span class="caret"></span>
               </button>
               <ul id="color-list" class="dropdown-menu" aria-labelledby="color-patches">
@@ -35,13 +41,7 @@
               </ul>
             </div>
           </div>
-          <div class="canvas col-md-1 col-sm-2 col-xs-2 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <button id="canvas-size" type="button" class="btn btn-primary btn-sm">Canvas Size</button>
-          </div>
-          <div class="canvas col-md-1 col-sm-2 col-xs-2 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <button id="clear-canvas" type="button" class="btn btn-success btn-sm">Clear Canvas</button>
-          </div>
-          <div id="instructions-menu" class="col-md-4 col-sm-4 col-xs-4 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+          <div id="instructions-menu" class="col-md-4 col-sm-4 col-xs-4 col-md-offset-0 col-sm-offset-0 col-xs-offset-0">
             <div class="dropdown">
               <button id="instructions-label" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Instructions
